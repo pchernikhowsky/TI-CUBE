@@ -2,7 +2,7 @@
 
 The TI CUBE is a homebrew microcomputer I designed based on the Texas Instruments TMS9900 microprocessor and its associated peripherals.
 
-In it's basic form the TI CUBE supports serial communications, 32KB of RAM and 32KB of ROM.
+In its basic form the TI CUBE supports serial communications, 32KB of RAM and 32KB of ROM.
 
 ## Why the TMS9900?
 
@@ -56,4 +56,5 @@ The following principles guided my development of this homebrew project. The lis
 -  1x 72-pin header socket for daisy chaining multiple backplanes
 -  1x 72-pin header pin connector for daisy chaining multiple backplanes
 -  1x 4-pin Berg connector for +5V and +12V power supplies (compatible with 3.5 in floppy power connector)
+
 
