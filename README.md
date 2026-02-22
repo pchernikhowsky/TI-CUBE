@@ -2,7 +2,7 @@
 
 The `TI CUBE` is a homebrew microcomputer I designed based on the Texas Instruments TMS9900 microprocessor and its associated peripherals.
 
-<img alt="Photo of the complete TI CUBE assembly" src="./images/Complete.jpg" style="width:33%; height:auto;" />
+<img alt="Photo of the complete TI CUBE assembly" src="./images/Complete.jpg" style="width:50%; height:auto;" />
 
 In its basic form the `TI CUBE` supports serial communications, 32KB of RAM and 32KB of ROM.
 
@@ -64,3 +64,4 @@ The following principles guided my development of this homebrew project. The lis
 [^1] A 48 MHz crystal is required for the TIM9904 and a 12 MHz crystal is required for the TIM9904A(NL). The LC tank circuit values must also be adjusted as per the notes on the CPU board schematic.
 
 [^2] The RAM and ROM sizes can be adjusted in any combination that fits within the 64KB address space simply by adjusting the logic for the chip enable outputs in the PLD program.
+
