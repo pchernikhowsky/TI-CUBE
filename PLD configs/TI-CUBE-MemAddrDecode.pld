@@ -1,0 +1,65 @@
+Name            TI CUBE TMS9901 Memory Board Address Decoder;
+Partno          ATF16V8 20-DIP;
+Revision        01;
+Date            2026/02/07;
+Designer        Paul Chernikhowsky;
+Company         ;
+Assembly        None;
+Location        U5;
+
+
+/* Pin Map 
+       --------
+A0     |1     20| Vcc
+A1     |2     19| DBIN 
+A2     |3     18| /WE
+A3     |4     17| /MEMEN
+A4     |5     16| /ROM_ACCESS_LED
+A5     |6     15| /RAM_ACCESS_LED
+A6     |7     14| /OE
+A7     |8     13| /ROM_CS
+A8     |9     12| /RAM_CS
+GND    |10    11| A9
+        --------
+*/
+
+/*
+ * Inputs:  All are signals from the TMS9900
+ */
+
+Pin [1..9,11] = [A15..6]; /* High address byte - NOTE: this is inverted from real pin labels: A0 = MSB for TMS9900!! */
+Pin 17 = !MEMEN;		/* Active low memory access cycle */
+Pin 18 = !WE;		/* Memory write enable - not currently used in this logic */
+Pin 19 = DBIN;		/* CPU Read signal */
+
+/*
+ * Outputs:  define outputs - all are simple combinatorial
+ */
+
+Pin 12 = !RAM_CS;			/* RAM chip select */
+Pin 13 = !ROM_CS;			/* ROM chip select */
+Pin 14 = !OE;   			/* RAM/RAM output enable */
+Pin 15 = !RAM_ACCESS_LED;  	/* RAM access in process LED */
+Pin 16 = !ROM_ACCESS_LED;  	/* ROM access in process LED */
+
+/*
+ * Local variables
+ */
+
+FIELD MemAddress = [A15..6];	    /* memory address bus */
+
+/*
+ * Logic:
+ */
+
+ROM     = MemAddress:[0000..7FFF];  /* 32K ROM */
+RAM     = MemAddress:[8000..FFFF];  /* 32K RAM */
+
+OE = ( RAM # ROM ) & DBIN & MEMEN;	/* read cycle for RAM or ROM */
+RAM_CS = RAM & MEMEN;			/* RAM access */
+ROM_CS = ROM & MEMEN;			/* ROM access */
+RAM_ACCESS_LED = RAM & MEMEN;		/* RAM access LED */
+ROM_ACCESS_LED = ROM & MEMEN;		/* ROM access LED */
+
+
+

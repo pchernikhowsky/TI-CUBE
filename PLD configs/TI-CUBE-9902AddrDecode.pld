@@ -1,0 +1,82 @@
+Name            TI CUBE TMS9902 ACC Address Decoder;
+Partno          ATF16V8 20-DIP;
+Revision        01;
+Date            2026/02/08;
+Designer        Paul Chernikhowsky;
+Company         ;
+Assembly        None;
+Location        U1 and U2;
+
+
+/* Pin Map 
+	  Original
+        --------
+A0     |1     20| Vcc
+A1     |2     19| /MEMEN
+A2     |3     18| Address select 5
+A3     |4     17| Address select 4
+A4     |5     16| Address select 3
+A5     |6     15| Address select 2
+A6     |7     14| Address select 1
+A7     |8     13| Address select 0
+A8     |9     12| /CE
+GND    |10    11| A9
+        --------
+
+                    Revised
+                    --------
+          Unused   |1     20| Vcc
+Address select 2   |2     19| /MEMEN
+Address select 3   |3     18| Address select 5
+              A3   |4     17| Address select 4
+              A4   |5     16| Unused
+              A5   |6     15| Unused
+              A6   |7     14| Address select 1
+              A7   |8     13| Address select 0
+              A8   |9     12| /CE
+              GND  |10    11| A9
+                    --------
+*/
+
+/*
+ * Inputs:  All are signals from the TMS9900
+ */
+Pin 4  = A3;	/* TMS9900 A3 line (MSB) */  
+Pin 5  = A4;	 
+Pin 6  = A5;
+Pin 7  = A6;
+Pin 8  = A7;
+Pin 9  = A8;
+Pin 11 = A9;	/* TMS9900 A9 line (LSB) */
+
+Pin 13 = !AS0;	/* Address select inputs are all active low */	
+Pin 14 = !AS1;
+Pin 2  = !AS2;
+Pin 3  = !AS3;
+Pin 17 = !AS4;
+Pin 18 = !AS5;
+
+Pin 19 = !MEMEN;
+
+/*
+ * Outputs:  define outputs - all are simple combinatorial
+ */
+Pin 12 = !ACC_CS; /* to TMS9902 ACC /CE pin */
+
+/*
+ * Local variables
+ */
+
+
+/*
+ * Logic:
+ */
+ACC_CS = !MEMEN & (
+                    (!A3 & !A4 & !A5 & !A6 & !A7 & !A8 & !A9 & AS0) #   /* 0x00 - 0x3F */
+                    (!A3 & !A4 & !A5 & !A6 & !A7 &  A8 & !A9 & AS1) #   /* 0x80 - 0xBF */
+                    (!A3 & !A4 & !A5 & !A6 & !A7 &  A8 &  A9 & AS2) #   /* 0xC0 - 0xFF  */
+                    (!A3 & !A4 & !A5 & !A6 &  A7 & !A8 & !A9 & AS3) #   /* 0x100 - 0x13F  */
+                    (!A3 & !A4 & !A5 &  A6 & !A7 & !A8 & !A9 & AS4) #   /* 0x200 - 0x23F  */
+                    (!A3 & !A4 &  A5 & !A6 & !A7 & !A8 & !A9 & AS5)     /* 0x400 - 0x43F  */
+                  );
+

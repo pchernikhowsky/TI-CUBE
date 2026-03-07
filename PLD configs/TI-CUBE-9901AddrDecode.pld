@@ -1,0 +1,67 @@
+Name            TI CUBE TMS9901 PSI Address Decoder;
+Partno          ATF16V8 20-DIP;
+Revision        01;
+Date            2026/02/07;
+Designer        Paul Chernikhowsky;
+Company         ;
+Assembly        None;
+Location        U5;
+
+
+/* Pin Map 
+       --------
+A0     |1     20| Vcc
+A1     |2     19| /HOLDA 
+A2     |3     18| /MEMEN
+A3     |4     17| --
+A4     |5     16| --
+A5     |6     15| --
+A6     |7     14| IAQ
+A7     |8     13| /CPU_ACT_LED
+A8     |9     12| /CE
+GND    |10    11| A9
+        --------
+*/
+
+$define ZERO A15 $ A15	/* Dumb syntax to create a zero for use in intermediate variables */
+
+/*
+ * Inputs:  All are signals from the TMS9900
+ */
+Pin [1..9,11] = [A15..6]; /* High address byte - NOTE: this is inverted from real pin labels: A0 = MSB for TMS9900!! */
+Pin 14 = IAQ;
+Pin 18 = !MEMEN;
+Pin 19 = HOLDA;
+
+/*
+ * Outputs:  define outputs - all are simple combinatorial
+ */
+Pin 12 = !PSI_CS;   	/* to PSI /CE pin */
+Pin 13 = !CPU_ACT_LED;  /* CPU activity LED */
+
+/*
+ * Local variables
+ */
+
+FIELD CRUAddress = [A15..6];      /* CRU IO address bus */
+CRUAddress_0 = A6;	  /* Shift CRUAddress right by 5 bits */
+CRUAddress_1 = A7;
+CRUAddress_2 = A8;
+CRUAddress_3 = A9;
+CRUAddress_4 = A10;
+CRUAddress_5 = A11;
+CRUAddress_6 = A12;
+CRUAddress_7 = A13;
+CRUAddress_8 = A14;
+CRUAddress_9 = A15;
+CRUAddress_10 = ZERO;     /* Zero out top bits of third nibble */
+CRUAddress_11 = ZERO;     /* Zero out top bits of third nibble */
+
+/*
+ * Logic:
+ */
+
+PSI     = CRUAddress:[040..07F];  	/* TMS9901 PSI address range - CRU I/O space */
+PSI_CS  = PSI & !MEMEN & !HOLDA;	/* In address range and not a memory cycle and not DMA */	
+
+CPU_ACT_LED = IAQ;	/* Turn on CPU activity LED when IAQ is high (LED is active low and IAQ is active high) */
