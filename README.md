@@ -1,10 +1,10 @@
 # The TI CUBE
 
-The `TI CUBE` is a homebrew microcomputer I designed based on the Texas Instruments TMS 9900 microprocessor and its associated peripherals.
+The `TI CUBE` is a homebrew microcomputer I designed based on the Texas Instruments TMS 9900 microprocessor and its associated peripheral devices.
 
 <img alt="Photo of the complete TI CUBE assembly" src="./images/Complete.jpg" style="width:50%; height:auto;" />
 
-In its basic form the `TI CUBE` supports serial communications, 32KB of RAM and 32KB of ROM.
+In its basic form the `TI CUBE` supports communications through two serial ports, 32KB of RAM, and 32KB of ROM.
 
 ## Why the TMS 9900?
 
@@ -23,15 +23,15 @@ The following principles guided my development of this homebrew project. The lis
    * Memory card (holding the RAM and ROM)
    * Serial port interface card (equipped with two serial chips driving two EIA-232C compatible ports). 
   
-   All cards plug into a backplane using 72 pin header connectors. Any card can go in any slot, and multiple cards (e.g., multiple seial interface cards) are supported. Additional backplanes can also be daisy-chained to support additional card slots.
+   All cards plug into a backplane using 72-pin header connectors. Any card can go in any slot, and multiple cards (e.g., multiple seial interface cards) are supported. Additional backplanes can also be daisy-chained to support additional card slots. The expansion connectors (especially the pin header connector) also makes for handy connections to bus signals for debugging (via a scope or logic analyzer).
 
 3. **Board size.** Constraining the board size to 100 x 100 mm (4 x 4 in) allows ordering PCBs using the [JLCPCB](https://jlcpcb.com) or [PCBWAY](https://pcbway.com) prototyping services (personally, I have had great experience with JLCPCB). This significantly reduces the cost of individual boards (approximately $2 per board). The physical construction also gives the `TI CUBE` its name: four 100 x 100 mm vertical cards plugged into a horizontal four-slot 100 x 100 mm backplane.
 
 4. **Simplicity.** I subscribe to the [Earl Muntz](https://en.wikipedia.org/wiki/Muntzing) philosophy. As such, the `TI CUBE` design uses the minimum required amount of components to accomplish its function. Random logic (i.e., TTL gates and decoders) is complex and consumes significant board space. Instead, I prefer to use simple and standard PLD devices like the ubiquitous 16V8, which does everything needed in one chip. This also allows easily reconfigurability simply by reprogramming the PLD. There are  no address or data buffers in the `TI CUBE`, but the small size combined with the use of four-layer PCBs keeps the digital signals clean; my builds have demonstrated excellent reliablity and performance. 
 
-5. **Period correctness.** Primarily this means use of only through-hole components (no surface mount). I've violated this rule in number of other places (e.g., use of PLDs instead of random logic, larger memory ICs compared to what was available in the 70s and early 80s), so this one is more a [guideline than an actual rule](https://www.youtube.com/watch?v=omjnIeLIzJc&t=13s). 😉
+5. **Period correctness.** Primarily this means use of only through-hole components (no surface mount). I don't mind SMD as such, but through-hole is still easier to assemble and is more typical of 70s/80s computers. I have violated the period-correctness rule in number of other places (e.g., use of PLDs instead of random logic, larger memory ICs compared to what was available in the 70s and early 80s), so this one is more a [guideline than an actual rule](https://www.youtube.com/watch?v=omjnIeLIzJc&t=13s). 😉
    
-6. **Compatibility.** I designed the `TI CUBE` to be compatible with other TMS 9900-based systems. One popular example is [Stuart Connor's TMS 9900 breadboard/PCB system](http://www.stuartconner.me.uk/tms9900_breadboard/tms9900_breadboard.htm). In fact, the binary files he provides can be downloaded, burned to EPROMs, and used directly in the `TI CUBE`. 
+8. **Compatibility.** I designed the `TI CUBE` to be compatible with other TMS 9900-based systems. One popular example is [Stuart Connor's TMS 9900 breadboard/PCB system](http://www.stuartconner.me.uk/tms9900_breadboard/tms9900_breadboard.htm). In fact, the binary files he provides can be downloaded, burned to EPROMs, and used directly in the `TI CUBE`. This includes the TIBUG monitor and Cortex BASIC!
 
 ## Specifications
 
