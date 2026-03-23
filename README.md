@@ -31,20 +31,20 @@ The following principles guided my development of this homebrew project. The lis
 
 5. **Period correctness.** Primarily this means use of only through-hole components (no surface mount). I don't mind SMD as such, but through-hole is still easier to assemble and is more typical of 70s/80s computers. I have violated the period-correctness rule in number of other places (e.g., use of PLDs instead of random logic, larger memory ICs compared to what was available in the 70s and early 80s), so this one is more a [guideline than an actual rule](https://www.youtube.com/watch?v=omjnIeLIzJc&t=13s). 😉
    
-8. **Compatibility.** I designed the `TI CUBE` to be compatible with other TMS 9900-based systems. One popular example is [Stuart Connor's TMS 9900 breadboard/PCB system](http://www.stuartconner.me.uk/tms9900_breadboard/tms9900_breadboard.htm). In fact, the binary files he provides can be downloaded, burned to EPROMs, and used directly in the `TI CUBE`. This includes the TIBUG monitor and Cortex BASIC!
+8. **Compatibility.** I designed the `TI CUBE` to be generally compatible with other TMS 9900-based systems. One example is [Stuart Connor's TMS 9900 breadboard/PCB system](http://www.stuartconner.me.uk/tms9900_breadboard/tms9900_breadboard.htm). In fact, the binary files he provides can be downloaded, burned to EPROMs, and used directly in the `TI CUBE`. This includes the TIBUG monitor and Cortex BASIC which work right out of the box!
 
 ## Specifications
 
 1. **CPU board** [(photo)](images/CPU.jpg)
--  TMS 9900 microprocessor running at 3 MHz (or 4 MHz if a TMS 9900-40 is used and the appropriate clock changes are made)
--  TIM 9904 or TIM 9904A clock generator[^1]
+-  TMS 9900 microprocessor running at 3 MHz[^1]
+-  TIM 9904 or TIM 9904A clock generator[^2]
 -  TMS 9901 programmable systems interface (PSI) for interrupt management
 -  ATF16V8 PLD for address decoding
 -  ICL7660 voltage convertor to generate the -5V power supply needed by the CPU
 -  2x red LEDs for CPU RESET signal and CPU activity (driven by the IAQ output) indication
 2. **Memory board** [(photo)](images/Memory.jpg)
--  2x EPROMs (e.g., 2764, 27128, 27256) for up to 32 KB of EPROM[^2]
--  2x static RAM (e.g., 55256) for up to 32 KB of RAM[^2]
+-  2x EPROMs (e.g., 2764, 27128, 27256) for up to 32 KB of EPROM[^3]
+-  2x static RAM (e.g., 55256) for up to 32 KB of RAM[^3]
 -  2x red LEDs for RAM and ROM access indication
 -  ATF16V8 PLD for address decoding
 -  Jumpers to control use of the EPROM A14 address line (or to select the high or low bank)
@@ -66,9 +66,11 @@ The following principles guided my development of this homebrew project. The lis
 
 # Notes
 
-[^1]: Depending on whether the TIM 9904 or TIM 9904A is used, and which CPU frequency is desired (12 or 16 MHz) different components must be selected for the clock crystal and tank circuit. A table of values is provided in the CPU schematic.
+[^1]: Overclocking to 4 MHz is possible if a TMS 9900-40 CPU is used and the appropriate clock component changes are made.
 
-[^2]: The RAM and ROM sizes can be adjusted in any combination that fits within the 64KB address space simply by adjusting the logic for the chip enable outputs in the PLD program.
+[^2]: Depending on whether the TIM 9904 or TIM 9904A is used, and which CPU frequency is desired (12 or 16 MHz) different components must be selected for the clock crystal and tank circuit. A table of values is provided in the CPU schematic.
+
+[^3]: The RAM and ROM sizes can be adjusted in any combination that fits within the 64KB address space simply by adjusting the logic for the chip enable outputs in the PLD program.
 
 
 
