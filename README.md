@@ -2,7 +2,7 @@
 
 The `TI CUBE` is a homebrew microcomputer I designed around the Texas Instruments TMS 9900 microprocessor and its associated peripheral devices.
 
-<img alt="Photo of the complete TI CUBE assembly" src="./images/Complete.jpg" style="width:66%; height:auto;" />
+<img alt="Photo of the complete TI CUBE assembly" src="./images/Complete.jpg" />
 
 In its basic form the `TI CUBE` supports communications through two serial ports and has 32KB of ROM and 32KB of RAM for code and data storage.
 
