@@ -29,7 +29,7 @@ The following principles guided my development of this homebrew project. The lis
 
 3. **Board size.** Constraining the board size to 100 x 100 mm (4 x 4 in) allows ordering PCBs using the [JLCPCB](https://jlcpcb.com) or [PCBWAY](https://pcbway.com) prototyping services (personally, I have had great experience with JLCPCB). This significantly reduces the cost of individual boards (approximately $2 per board). The physical construction also gives the `TI CUBE` its name: four 100 x 100 mm vertical cards plugged into a horizontal four-slot 100 x 100 mm backplane.
 
-4. **Simplicity.** I subscribe to the [Earl Muntz](https://en.wikipedia.org/wiki/Muntzing) philosophy. As such, the `TI CUBE` design uses the minimum required amount of components to accomplish its function. Random logic (i.e., TTL gates and decoders) is complex and consumes significant board space. Instead, I prefer to use simple and standard PLD devices like the ubiquitous 16V8, which does everything needed in one chip. This also allows easily reconfigurability simply by reprogramming the PLD. There are  no address or data buffers in the `TI CUBE`, but the small size combined with the use of four-layer PCBs keeps the digital signals clean; my builds have demonstrated excellent reliablity and performance. 
+4. **Simplicity.** I subscribe to the [Earl Muntz](https://en.wikipedia.org/wiki/Muntzing) philosophy. As such, the `TI CUBE` design uses the minimum required amount of components to accomplish its function. Random logic (i.e., TTL gates and decoders) is complex and consumes significant board space. Instead, I prefer to use simple and standard PLD devices like the ubiquitous 16V8, which does everything needed in one chip.[^4] This also allows easily reconfigurability simply by reprogramming the PLD. There are  no address or data buffers in the `TI CUBE`, but the small size combined with the use of four-layer PCBs keeps the digital signals clean; my builds have demonstrated excellent reliablity and performance. 
 
 5. **Period correctness.** Primarily this means use of only through-hole components (no surface mount). I don't mind SMD as such, but through-hole is still easier to assemble and is more typical of 70s/80s computers. I have violated the period-correctness rule in number of other places (e.g., use of PLDs instead of random logic, larger memory ICs compared to what was available in the 70s and early 80s), so this one is more a [guideline than an actual rule](https://www.youtube.com/watch?v=omjnIeLIzJc&t=13s). 😉
    
@@ -74,7 +74,7 @@ The following principles guided my development of this homebrew project. The lis
 
 [^3]: The RAM and ROM sizes can be adjusted in any combination that fits within the 64KB address space simply by adjusting the logic for the chip enable outputs in the PLD program.
 
-
+[^4]: The use of PLDs does mean that you need a programmer (such as the [XGecu TL866II Plus](http://autoelectric.cn/EN/TL866_main.html), or similar). What, you don't have one? Then get one - they're super handy for retrocomputing.
 
 
 
